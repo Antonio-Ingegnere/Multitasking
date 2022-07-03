@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Multitasking.MainPage">
+
+    <ContentPage.Resources>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="54"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="110"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- New todo item -->
+            <Entry Completed="OnTextCompleted"
+                x:Name="taskDescription"
+				Text="{Binding NewTodo.Description}"
+				VerticalOptions="Fill"
+				Grid.Row="0"
+				Grid.Column="0"/>
+
+            <Button Clicked="OnCounterClicked"
+				Text="Click me"
+				VerticalOptions="End"
+				Grid.Row="0"
+				Grid.Column="1"/>
+
+        </Grid>
+
+        <!-- Todo list -->
+        <StackLayout BindableLayout.ItemsSource="{Binding TodoList}"
+					 Grid.Row="1">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Description}" TextColor="Red" HorizontalTextAlignment="Center" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+
+            <BindableLayout.EmptyView>
+                <Label Text="Thank you for subscribing!" TextColor="Green" />
+            </BindableLayout.EmptyView>
+        </StackLayout>
+        <!--<StackLayout BindableLayout.ItemsSource="{Binding TodoList}">
+			<BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Description}" TextColor="Red" HorizontalTextAlignment="Center" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+
+            <BindableLayout.EmptyView>
+                <Label Text="Thank you for subscribing!" TextColor="Green" />
+            </BindableLayout.EmptyView>
+		</StackLayout>-->
+        <!--<ScrollView Grid.Row="1">
+			<HorizontalStackLayout 
+				BindableLayout.ItemsSource="{Binding TodoList}">
+				<BindableLayout.ItemTemplate>
+					<DataTemplate>
+						<StackLayout>
+							<Label Text="{Binding .Description}"></Label>
+						</StackLayout>
+					</DataTemplate>
+				</BindableLayout.ItemTemplate>
+				
+			</HorizontalStackLayout>
+			
+		</ScrollView>-->
+
+
+
+
+    </Grid>
+
+</ContentPage>
