@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Multitasking.Data.Migration;
 
 using Microsoft.Data.Sqlite;
+using Dapper;
 
 namespace Multitasking.Data
 {
@@ -40,9 +41,7 @@ namespace Multitasking.Data
         {
             if (_connection != null)
             {
-                var command = _connection.CreateCommand();
-                command.CommandText = versionMigration.SqlScript;
-                command.ExecuteNonQuery();
+                _connection.Execute(versionMigration.SqlScript);
 
                 versionMigration.Executed = true;
             }
