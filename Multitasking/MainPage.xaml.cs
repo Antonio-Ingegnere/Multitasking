@@ -27,6 +27,11 @@ public partial class MainPage : ContentPage
 
     private void GetDataFromDB()
     {
+        SqlBaseRepository sql = new SqlBaseRepository();
+        DBMigration migration = new DBMigration(sql.GetSqlConnection());
+        migration.ExecuteMigration();
+
+
         //using(var dataContext = new DataContext())
         {
 

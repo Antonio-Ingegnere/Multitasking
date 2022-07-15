@@ -1,4 +1,5 @@
-﻿namespace Multitasking;
+﻿
+namespace Multitasking;
 
 public partial class App : Application
 {

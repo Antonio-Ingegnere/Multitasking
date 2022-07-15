@@ -50,7 +50,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="Dapper" Version="2.0.123" />
+	  <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Data\Scripts\SQLScripts.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>SQLScripts.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Data\Scripts\SQLScripts.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>SQLScripts.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
