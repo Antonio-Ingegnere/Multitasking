@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Multitasking.Data.Migration;
+﻿using Multitasking.Data.Migration;
 
 using Microsoft.Data.Sqlite;
 using Dapper;
 
 namespace Multitasking.Data
 {
-
-    internal class DBMigration
+    internal class DbMigration
     {
         private readonly SqliteConnection _connection;
-        private IList<VersionMigration> _migrationFlow = new List<VersionMigration>();
+        private readonly IList<VersionMigration> _migrationFlow = new List<VersionMigration>();
 
-        public DBMigration(SqliteConnection connection)
+        public DbMigration(SqliteConnection connection)
         {
             _migrationFlow.Add(new Version01Migration());
             _connection = connection;
