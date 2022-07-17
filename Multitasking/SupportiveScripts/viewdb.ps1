@@ -1,0 +1,1 @@
+﻿ & '..\..\Tools\DbBrowser\DB Browser for SQLite.exe'  ..\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\AppX\storage.db

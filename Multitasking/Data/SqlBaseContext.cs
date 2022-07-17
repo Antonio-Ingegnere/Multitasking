@@ -10,18 +10,18 @@ namespace Multitasking.Data
 {
     //Make it singleton?
     //TODO: Refactor for using with IoC
-    internal class SqlBaseRepository : IDisposable
+    internal class SqlBaseContext : IDisposable
     {
         private const string _dbFileName = "storage.db";
         private readonly string _filePath;
         private readonly SqliteConnection _sqliConnection;
         private bool disposedValue;
 
-        public SqlBaseRepository() : this(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _dbFileName))
+        public SqlBaseContext() : this(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _dbFileName))
         {
         }
 
-        public SqlBaseRepository(string filePath)
+        public SqlBaseContext(string filePath)
         {
             _filePath = filePath;
             _sqliConnection = new SqliteConnection("Data Source=" + _filePath);
@@ -52,7 +52,7 @@ namespace Multitasking.Data
         }
 
         // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        // ~SqlBaseRepository()
+        // ~SqlBaseContext()
         // {
         //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         //     Dispose(disposing: false);

@@ -2,18 +2,15 @@
 {
     internal abstract class VersionMigration
     {
-        private readonly string _sqlScript;
-        private readonly int _version;
-
         public VersionMigration(int version, string sqlScript)
         {
-            _version = version;
-            _sqlScript = sqlScript;
+            Version = version;
+            SqlScript = sqlScript;
             Executed = false;
         }
 
-        public int Version { get { return _version; } }
-        public string SqlScript { get { return _sqlScript; } }
+        public int Version { get; }
+        public string SqlScript { get; }
         public bool Executed { get; set; }
     }
 }
