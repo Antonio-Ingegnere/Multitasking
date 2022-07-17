@@ -1,5 +1,4 @@
 ﻿using Multitasking.Data.Migration;
-
 using Microsoft.Data.Sqlite;
 using Dapper;
 
@@ -7,27 +6,24 @@ namespace Multitasking.Data
 {
     internal class DbMigration
     {
-        private readonly SqliteConnection _connection;
+        private readonly SqlBaseContext _dataContext;
         private readonly IList<VersionMigration> _migrationFlow = new List<VersionMigration>();
 
-        public DbMigration(SqliteConnection connection)
+        public DbMigration(SqlBaseContext connection)
         {
             _migrationFlow.Add(new Version01Migration());
-            _connection = connection;
-
-            _connection.Open();
         }
 
         private bool IsMigrationRequired()
         {
             var countVersionNumberTables =
-                _connection.ExecuteScalar<int>("SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Version'");
+                _dataContext.ExecuteScalar<int>("SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Version'");
 
             if (countVersionNumberTables <= 0)
                 return true;
 
 
-            var existingAppVersionNumber = _connection.ExecuteScalar<int>("SELECT VersionNumber FROM Version ORDER by VersionNumber LIMIT 1");
+            var existingAppVersionNumber = _dataContext.ExecuteScalar<int>("SELECT VersionNumber FROM Version ORDER by VersionNumber LIMIT 1");
 
             var newVersion = _migrationFlow.Max(item => item.Version);
 
@@ -65,9 +61,9 @@ namespace Multitasking.Data
 
         private void ApplyVersionMigration(VersionMigration versionMigration)
         {
-            if (_connection != null)
+            if (_dataContext != null)
             {
-                _connection.Execute(versionMigration.SqlScript);
+                _dataContext.Execute(versionMigration.SqlScript);
 
                 versionMigration.Executed = true;
             }
@@ -76,10 +72,10 @@ namespace Multitasking.Data
         private void SetMigrationVersion(int versionNumber)
         {
             //Clearing version number
-            _connection.Execute("DELETE FROM Version");
+            _dataContext.Execute("DELETE FROM Version");
 
             //Set proper version number
-            _connection.Execute($"INSERT INTO Version(VersionNumber) VALUES({versionNumber})");
+            _dataContext.Execute($"INSERT INTO Version(VersionNumber) VALUES({versionNumber})");
 
         }
     }

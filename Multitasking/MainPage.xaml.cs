@@ -27,8 +27,8 @@ public partial class MainPage : ContentPage
 
     private void GetDataFromDB()
     {
-        SqlBaseContext sql = new SqlBaseContext();
-        DBMigration migration = new DBMigration(sql.GetSqlConnection());
+        SqlBaseContext sqlContext = new SqlBaseContext();
+        DbMigration migration = new DbMigration(sqlContext);
         //migration.ExecuteMigration();
         migration.UpdateDbIfNeeded();
 
